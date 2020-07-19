@@ -1,0 +1,366 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>主谓宾游戏（随机版）</title>
+	<link href="style-game.css" rel="stylesheet" type="text/css">
+	<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+	</script>
+</head>
+
+<body>
+	<!--人物（主语）-->
+	<div id="mask"></div>
+	<div id="box">
+		<div>班主任</div>
+		<div>室友</div>
+		<div>金坷垃</div>
+	</div>
+	<button class="btn1" id="btn10" onClick="Start1()">开始</button>
+	<button class="btn1" id="btn11" onClick="Add1()">添加</button>
+	<button class="btn1" id="btn12" onClick="Remove1()">删除</button>
+	<div id="luck">
+		<h2></h2>
+		<input type="button" value="ok1" id="bbt">
+	</div>
+
+
+	<div id="box2">
+		<div>在卫生间</div>
+		<div>在大明湖畔</div>
+		<div>在垃圾场</div>
+	</div>
+	<button class="btn2" id="btn20" onClick="Start2()">开始</button>
+	<button class="btn2" id="btn21" onClick="Add2()">添加</button>
+	<button class="btn2" id="btn22" onClick="Remove2()">删除</button>
+
+	<div id="luck2">
+		<h2></h2>
+		<input type="button" value="ok2" id="bbt2">
+	</div>
+
+	<div id="box3">
+		<div>跳舞</div>
+		<div>喊麦</div>
+		<div>拉稀</div>
+	</div>
+	<button class="btn3" id="btn30" onClick="Start3()">开始</button>
+	<button class="btn3" id="btn31" onClick="Add3()">添加</button>
+	<button class="btn3" id="btn32" onClick="Remove3()">删除</button>
+	<div id="luck3">
+		<h2></h2>
+		<input type="button" value="ok3" id="bbt3">
+	</div>
+	<img src="help.png" style="width: 5%;position: absolute;left:80px;top:830px" onClick="Help()">
+	<div id="answer" onClick="Answer()">点击这里，连词成句</div>
+
+
+	<script>
+		function Help() {
+			alert('游戏规则：点击\'开始\'随机抽取相应词汇组成一句话,点击\'添加\'可以添加您想添加的内容，点击\'删除\'即可删除。\n看看最后会组成怎样的一句话吧！');
+		}
+		var box = document.getElementById('box');
+		var box2 = document.getElementById('box2');
+		var box3 = document.getElementById('box3');
+		var btn10 = document.getElementById('btn10');
+		var btn11 = document.getElementById('btn11');
+		var btn12 = document.getElementById('btn12');
+		var btn20 = document.getElementById('btn20');
+		var btn21 = document.getElementById('btn21');
+		var btn22 = document.getElementById('btn22');
+		var btn30 = document.getElementById('btn30');
+		var btn31 = document.getElementById('btn31');
+		var btn32 = document.getElementById('btn32');
+		var mask = document.getElementById('mask');
+		var luck = document.getElementById('luck');
+		var luck2 = document.getElementById('luck2');
+		var bbt = document.getElementById('bbt');
+		var bbt2 = document.getElementById('bbt2');
+		var bbt3=document.getElementById('bbt3')
+		var divs = box.getElementsByTagName('div');
+		var divs2 = box2.getElementsByTagName('div');
+		var divs3 = box3.getElementsByTagName('div');
+
+		//box
+		var k = []; //创建一个数组用于记录选中的词汇
+		for (var i = 0; i < divs.length; i++) { //给每个div绑定双击事件
+			divs[i].index = i; //记录每个div的索引
+			divs[i].ondblclick = edit;
+		}
+		var html;
+		var t = 0;
+
+		function type() { //把结果像打字效果一样输出
+			if (t <= html.length) {
+				luck.children[0].innerText = html.substring(0, t++);
+				setTimeout(type, 400);
+			} else {
+				t = 0;
+			}
+		}
+
+		function Start1() {
+			btn10.disabled = true; //避免重复点击
+			btn11.disabled = true;
+			btn12.disabled = true;
+			var cut = setInterval(toggle1, 100); //开始抽选
+			setTimeout(function() {
+				clearInterval(cut);//停止循环
+				var l = document.querySelector('.light');
+				k.push(l.index); //记录被选的下标
+				console.log(k);
+				luck.style = "top: 200px;";
+				html = l.innerText;
+				type();
+				btn10.disabled = false; //恢复按钮的点击
+				btn11.disabled = false;
+				btn12.disabled = false;
+			}, 2000);
+		}
+
+		bbt.onclick = function() { //去除遮罩层
+			luck.style = "top: -200px;";
+		}
+		var j;
+
+		function toggle1() {
+			for (var i = 0; i < divs.length; i++) {
+				divs[i].className = "";
+			}
+			j = Math.floor(Math.random() * divs.length); //取随机数
+			var q = k.some(value => { //查询是否存在一样的值
+				return value == j;
+			});
+			if (q) {
+				if (k.length >= divs.length) { //判断所有词汇是否被抽过
+					alert("全部都被点过一遍了");
+					k = []; //清空记录的数组
+				}
+				toggle1(); //存在一样的值就再取一次
+			} else
+				divs[j].className = "light";
+		}
+
+		function edit() { //div内容编辑功能
+			var str = this.innerHTML;
+			this.innerHTML = '<input type="text" />';
+			var input = this.children[0];
+			input.value = str;
+			input.select(); //默认全选中
+			input.onblur = function() { //失去焦点后改变div的值
+				this.parentNode.innerText = this.value;
+			}
+		}
+
+		function Add1() { //添加div功能
+			var div = document.createElement('div');
+			div.innerText = "双击可改名";
+			box.appendChild(div);
+			//添加div后重新获取div的数量以及给它绑定双击事件
+			divs = box.getElementsByTagName('div');
+			for (var i = 0; i < divs.length; i++) {
+				divs[i].index = i;
+				divs[i].ondblclick = edit;
+			}
+		}
+
+		function Remove1() { //删除div功能
+			divs[divs.length - 1].remove();
+			//添加div后重新获取div的数量以及给它绑定双击事件
+			divs = box.getElementsByTagName('div');
+			for (var i = 0; i < divs.length; i++) {
+				divs[i].index = i;
+				divs[i].ondblclick = edit;
+			}
+		}
+
+		//box2
+		var m = [];
+		for (var y = 0; y < divs2.length; y++) {
+			divs2[y].index = y;
+			divs2[y].ondblclick = edit2;
+		}
+		var html2;
+		var r = 0;
+
+		function type2() {
+			if (r <= html2.length) {
+				luck2.children[0].innerText = html2.substring(0, r++);
+				setTimeout(type2, 400);
+			} else {
+				r = 0;
+			}
+		}
+
+		function Start2() {
+			btn20.disabled = true;
+			btn21.disabled = true;
+			btn22.disabled = true;
+			var cut2 = setInterval(toggle2, 100);
+			setTimeout(function() {
+				clearInterval(cut2);
+				var c = document.querySelector('.light2');
+				m.push(c.index);
+				console.log(m);
+				luck2.style = "top: 200px;";
+				html2 = c.innerText;
+				type2();
+				btn20.disabled = false;
+				btn21.disabled = false;
+				btn22.disabled = false;
+			}, 2000);
+		}
+		bbt2.onclick = function() {
+			document.getElementById('luck2').style = "top: -200px;";
+		}
+		var h;
+
+		function toggle2() {
+			for (var y = 0; y < divs2.length; y++) {
+				divs2[y].className = "";
+			}
+			h = Math.floor(Math.random() * divs2.length);
+			var w = m.some(value => {
+				return value == h;
+			});
+			if (w) {
+				if (m.length >= divs2.length) {
+					alert("全部都被点过一遍了");
+					m = [];
+				}
+				toggle2();
+			} else
+				divs2[h].className = "light2";
+		}
+
+
+		function edit2() {
+			var str2 = this.innerHTML;
+			this.innerHTML = '<input type="text" />';
+			var input2 = this.children[0];
+			input2.value = str2;
+			input2.select();
+			input2.onblur = function() {
+				this.parentNode.innerText = this.value;
+			}
+		}
+
+		function Add2() {
+			var div2 = document.createElement('div');
+			div2.innerText = "双击可改名";
+			box2.appendChild(div2);
+			divs2 = box2.getElementsByTagName('div');
+			for (var y = 0; y < divs2.length; y++) {
+				divs2[y].index = y;
+				divs2[y].ondblclick = edit;
+			}
+		}
+
+		function Remove2() {
+			divs2[divs2.length - 1].remove();
+			divs2 = box2.getElementsByTagName('div');
+			for (var y = 0; y < divs2.length; y++) {
+				divs2[y].index = y;
+				divs2[y].ondblclick = edit;
+			}
+		}
+
+
+		//box3
+		var z = [];
+		for (var y = 0; y < divs3.length; y++) {
+			divs3[y].index = y;
+			divs3[y].ondblclick = edit3;
+		}
+		var html3;
+		var r = 0;
+
+		function type3() {
+			if (r <= html3.length) {
+				luck3.children[0].innerText = html3.substring(0, r++);
+				setTimeout(type3, 400);
+			} else {
+				r = 0;
+			}
+		}
+
+		function Start3() {
+			btn30.disabled = true;
+			btn31.disabled = true;
+			btn32.disabled = true;
+			var cut3 = setInterval(toggle3, 100);
+			setTimeout(function() {
+				clearInterval(cut3);
+				var x = document.querySelector('.light3');
+				z.push(x.index);
+				console.log(z);
+				luck3.style = "top: 200px;";
+				html3 = x.innerText;
+				type3();
+				btn30.disabled = false;
+				btn31.disabled = false;
+				btn32.disabled = false;
+			}, 2000);
+		}
+		bbt3.onclick = function() {
+			document.getElementById('luck3').style = "top: -200px;";
+		}
+		var g;
+
+		function toggle3() {
+			for (var y = 0; y < divs3.length; y++) {
+				divs3[y].className = "";
+			}
+			g = Math.floor(Math.random() * divs3.length);
+			var s = z.some(value => {
+				return value == g;
+			});
+			if (s) {
+				if (z.length >= divs3.length) {
+					alert("全部都被点过一遍了");
+					z = [];
+				}
+				toggle3();
+			} else
+				divs3[g].className = "light3";
+		}
+
+
+		function edit3() {
+			var str3 = this.innerHTML;
+			this.innerHTML = '<input type="text" />';
+			var input3 = this.children[0];
+			input3.value = str3;
+			input3.select();
+			input3.onblur = function() {
+				this.parentNode.innerText = this.value;
+			}
+		}
+
+		function Add3() {
+			var div3 = document.createElement('div');
+			div3.innerText = "双击可改名";
+			box3.appendChild(div3);
+			divs3 = box3.getElementsByTagName('div');
+			for (var y = 0; y < divs3.length; y++) {
+				divs3[y].index = y;
+				divs3[y].ondblclick = edit;
+			}
+		}
+
+		function Remove3() {
+			divs3[divs3.length - 1].remove();
+			divs3 = box3.getElementsByTagName('div');
+			for (var y = 0; y < divs3.length; y++) {
+				divs3[y].index = y;
+				divs3[y].ondblclick = edit3;
+			}
+		}
+		function Answer(){
+			document.getElementById('answer').innerHTML=html+html2+html3;
+		}
+	</script>
+</body>
+
+</html>

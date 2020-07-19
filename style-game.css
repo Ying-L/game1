@@ -1,0 +1,280 @@
+@charset "utf-8";
+/* CSS Document */
+#box{
+	background-color:#D0E4F2;
+	float:left;
+	width:27%;
+	height:700px;
+	margin: 50px 50px;
+	border-radius: 10px;
+	border:2px #30395C solid;
+	overflow-x: none;
+    overflow-y: auto;
+}
+#box2{
+	background-color:#4A6491;
+	float:left;
+	width:27%;
+	height:700px;
+	margin: 50px 50px;
+	border-radius: 10px;
+	border:2px #30395C solid;
+	overflow-x: none;
+    overflow-y: auto;
+}
+#box3{
+	background-color:#85A5CC;
+	float:left;
+	width:27%;
+	height:700px;
+	margin: 0px 50px;
+	border-radius: 10px;
+	border:2px #30395C solid;
+	overflow-x: none;
+    overflow-y: auto;
+}
+#box div{
+	width: 150px;
+    height: 80px;
+    float: left;
+    background-color:#85A5CC;
+    margin-top: 10px;
+    margin-left: 15px;
+    text-align: center;
+    line-height: 80px;
+    font-size: 20px;
+    border: 1px #1a1f3b solid;
+    border-radius: 10px;
+}
+#box2 div{
+	width: 150px;
+    height: 80px;
+    float: left;
+    background-color:#A8BEDA;
+    margin-top: 10px;
+    margin-left: 15px;
+    text-align: center;
+    line-height: 80px;
+    font-size: 20px;
+    border: 1px #1a1f3b solid;
+    border-radius: 10px;
+}
+#box3 div{
+	width: 150px;
+    height: 80px;
+    float: left;
+    background-color:#D0E4F2;
+    margin-top: 10px;
+    margin-left: 15px;
+    text-align: center;
+    line-height: 80px;
+    font-size: 20px;
+    border: 1px #1a1f3b solid;
+    border-radius: 10px;
+}
+#box div input{
+	width:80%;
+	height:80%;
+}
+
+.btn1,.btn2{
+	position: relative;
+	width:110px;
+    display: inline-block;
+    cursor: pointer;
+    border: 0;
+	border-radius: 10px;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+	top:770px;
+}
+.btn3{
+	position: relative;
+	width:110px;
+    display: inline-block;
+    cursor: pointer;
+    border: 0;
+	border-radius: 10px;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+	top:750px;
+}
+
+#luck{
+	background-color:#DDEAF3;
+	width: 400px;
+    height: 200px;
+    position: absolute;
+    top: -200px;
+    left: 15%;
+    margin-left: -200px;
+    text-align: center;
+	border-radius: 10px;
+    transition: all 1s ease-out 0s;
+    z-index: 99;
+}
+#luck2{
+	background-color:#DDEAF3;
+	width: 400px;
+    height: 200px;
+    position: absolute;
+    top: -200px;
+    left: 50%;
+    margin-left: -200px;
+    text-align: center;
+	border-radius: 10px;
+    transition: all 1s ease-out 0s;
+    z-index: 99;
+}
+#luck3{
+	background-color:#DDEAF3;
+	width: 400px;
+    height: 200px;
+    position: absolute;
+    top: -200px;
+    left: 80%;
+    margin-left: -200px;
+    text-align: center;
+	border-radius: 10px;
+    transition: all 1s ease-out 0s;
+    z-index: 99;
+}
+img:hover{
+	cursor: pointer;
+	position: relative;
+}
+#btn10{
+	background-color:#F4FB6A;
+    left:-1150px;
+}
+#btn11{
+	background-color:darkseagreen;
+	left:-1120px;
+}
+#btn12{
+	background-color:#F05C5F;
+	left:-1090px;
+}
+#btn20{
+	background-color:#F4FB6A;
+	left:-880px;
+}
+#btn21{
+	background-color:darkseagreen;
+	left:-830px;
+}
+#btn22{
+	background-color:#F05C5F;
+	left:-210px;
+	top:745px;
+}
+#btn30{
+	background-color:#F4FB6A;
+	left:-20px;
+}
+#btn31{
+	background-color:darkseagreen;
+	left:30px;
+}
+#btn32{
+	background-color:#F05C5F;
+	left:60px;
+}
+.light,.light2,.light3{
+    box-shadow: 0 0 10px 5px powderblue;
+    transform: scale(1.2);
+    color: powderblue;
+}
+
+#luck h2{
+    color: black;
+	margin-top:70px;
+}
+#luck2 h2{
+    color: black;
+	margin-top:70px;
+}
+#luck3 h2{
+    color: black;
+	margin-top:70px;
+}
+#luck input{
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    vertical-align: bottom;
+    text-decoration: none;
+    font-size: 16px;
+    color:black;
+    border: 1px solid #30395C;
+    padding: 10px 20px;
+    transition: all 1s linear 0s;
+    background: #D0E4F2;
+}
+#luck2 input{
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    vertical-align: bottom;
+    text-decoration: none;
+    font-size: 16px;
+    color:black;
+    border: 1px solid #30395C;
+    padding: 10px 20px;
+    transition: all 1s linear 0s;
+    background: #D0E4F2;
+}
+#luck3 input{
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    vertical-align: bottom;
+    text-decoration: none;
+    font-size: 16px;
+    color:black;
+    border: 1px solid #30395C;
+    padding: 10px 20px;
+    transition: all 1s linear 0s;
+    background: #D0E4F2;
+}
+#luck input:hover{
+    border: 2px solid #85A5CC;
+    border-radius: 20px;
+    font-weight: 700;
+    transform: scale(1.5);
+    color: BLACK;
+}
+#luck2 input:hover{
+    border: 2px solid #85A5CC;
+    border-radius: 20px;
+    font-weight: 700;
+    transform: scale(1.5);
+    color: BLACK;
+}
+#luck3 input:hover{
+    border: 2px solid #85A5CC;
+    border-radius: 20px;
+    font-weight: 700;
+    transform: scale(1.5);
+    color: BLACK;
+}
+#answer{
+	position: absolute;
+	background-color: #D0E4F2;
+	width:1500px;
+	height: 100px;
+	top:820px;
+	left:300px;
+	border-radius: 20px;
+	text-align: center;
+	line-height: 100px;
+	font-size: 30px;
+	font-weight: bolder;
+}
+#answer:hover{
+	cursor: pointer;
+}
